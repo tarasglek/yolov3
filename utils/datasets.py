@@ -176,7 +176,8 @@ class LoadImages:  # for inference
             # Read image
             self.count += 1
             img0 = cv2.imread(path)  # BGR
-            assert img0 is not None, 'Image Not Found ' + path
+            if img0 is None:
+                return self.__next__()
             print('image %g/%g %s: ' % (self.count, self.nf, path), end='')
 
         # Padded resize
